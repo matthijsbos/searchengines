@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="ICTZ Portaal">
+	    <meta name="author" content="ICTZ">
+	    <title>Kamervragen search</title>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="lib/durandal/css/durandal.css" />
+        <link rel="stylesheet" href="lib/jqcloud/jqcloud.css" />
+        <script>
+            (function() {
+                if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                    var msViewportStyle = document.createElement("style");
+                    msViewportStyle.appendChild(
+                        document.createTextNode("@-ms-viewport{width:auto!important}")
+                    );
+                    document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+                }
+            })();
+        </script>		    
+        <script src="lib/chart/chart.js"></script>
+    </head>
+    <body>
+        <div id="applicationHost">
+            <div class="splash">
+              <div class="message">
+                  Kamervragen search
+              </div>
+              <i class="icon-spinner icon-2x icon-spin active"></i>
+          </div>
+        </div>
+
+        <script src="lib/require/require.js" data-main="app/main"></script>
+    </body>
+</html>
