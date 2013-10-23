@@ -1,5 +1,10 @@
 #!/usr/bin/python
-import xml.etree.ElemenTree as ET
+import os
+from subprocess import call
 
-tree = ET.parse('country_data.xml')
-root = tree.getroot()
+if not os.path.exists('./transformed'):
+	os.makedirs('./transformed')
+
+for filename in os.listdir('.'):
+    if not filename.endswith('.xml'): continue
+    call(['transform', '-s:'+filename, '-xsl:transform.xsl', '-o:./transformed/'+filename])
