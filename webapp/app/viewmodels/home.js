@@ -3,13 +3,31 @@ define(['knockout', 'jquery', 'jqcloud'], function(ko, $, _) {
         var self = this;
         self.search = ko.observable('');
         self.searching = ko.observable(false);
+	self.page = ko.observable(1);
+	self.pageCount = ko.observable(4);
         self.searchButtonClicked = function() {
             self.results([]);
             self.searching(true);
-            setTimeout(function() {
-                self.searching(false);
-                self.results(new Array(5));
-                
+//	    $.ajax({ url: 'http://localhost:8983/solr/collection1/select',
+//	          data: { 'q': self.search(), 'wt': 'json' },
+//		     success: function(data) {
+//			alert(data);	
+//	},
+//		    datatype: 'jsonp',
+//		    jsonp: 'json.wrf'
+//	    });
+		$.getJSON('/search',
+			  {'q': self.search() || '*', 'wt':'json', 'json.wrf': '?' },
+			  function(data) {
+				self.results(data.response.docs);
+				self.searching(false);
+				self.page(1);
+				var c = data.response.numFound / data.responseHeader.params.rows;
+				c = Math.ceil(c);
+				self.pageCount(c);
+			  });
+
+		setTimeout(function() {
 
                 var drawCharts = function() {
                     $('canvas').each(function() {

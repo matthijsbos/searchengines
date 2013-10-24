@@ -5,7 +5,7 @@
                 <div class="panel-heading">
                     <form>
                         <div class="input-group">
-                            <input class="form-control" type="search" placeholder="Search" autofocus />
+                            <input class="form-control" type="search" placeholder="Search" autofocus data-bind="value:search" />
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-primary" data-bind="click: searchButtonClicked">Search</button> 
                             </div>
@@ -20,28 +20,23 @@
                     <tbody data-bind="foreach: results">
                          <tr>
                             <td>
-                                <a href="#"><strong>Search result title</strong></a>
+                                <a href="#"><strong data-bind="text: id"></strong></a>
                                 <br />
-                                <a href="#">http://www.somelink.com/some/path</a>
+				<a href="#" data-bind="text: permalink, attr: { href: permalink }"></a>
                                 <br />
-                                <span>Some short text describing the search result. Contains <strong>bold</strong> terms indicating a match with the query. Some short text describing the search result. Contains <strong>bold</strong> terms indicating a match with the query.</span>
+                                <span data-bind="text: summary">summary</span>
                                 <button type="button" class="wordcloud btn btn-link btn-sm pull-right"><i class="icon-cloud"></i> Word cloud</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="panel-footer" style="text-align:center" data-bind="visible: !searching() && results().length > 0">
-                    <ul class="pagination">
-                        <li class="disabled"><a href="#">&laquo;</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">&raquo;</a></li>
+                    <ul class="pagination" >
+			<li data-bind="css: { disabled: $root.page() == 1 }"><a class="disabled" href="#" >&laquo;</a></li>
+			<!-- ko foreach: ko.utils.range(1, pageCount()) -->
+				<li data-bind="css: { active: $root.page() == $data }"><a href="#" data-bind="text: $data">page</a></li>
+			<!-- /ko -->
+			<li data-bind="css: {disabled: $root.page() == $root.pageCount() }"><a href="#">&raquo;</a></li>
                     </ul>
                 </div>
             </div>
