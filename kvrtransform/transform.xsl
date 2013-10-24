@@ -7,10 +7,7 @@
 				<field name="permalink"><xsl:value-of select="//item[@attribuut='Permalink']/text()" /></field>
 				<field name="summary"><xsl:value-of select="//item[@attribuut='Inhoud']/text()" /></field>
 				<field name="year"><xsl:value-of select="year-from-date(xs:date(//item[@attribuut='Datum_indiening']/text()))" /></field>
-
-				<xsl:for-each select="distinct-values(kvr/meta/vraagdata/vrager/@partij)">
-					<field name="parties"><xsl:value-of select="."/></field>
-				</xsl:for-each>
+				<field name="party"><xsl:value-of select="(kvr/meta/vraagdata/vrager/@partij)[1]"/></field>
 				<xsl:for-each select="kvr/vragen/vraag">
 					<field name="questions"><xsl:value-of select="string-join(text(), ' ')" /></field>
 				</xsl:for-each>
