@@ -13,7 +13,7 @@
 	  var options = {
 		  host: 'localhost',
 	  	  port: 8983,
-	  	  path: '/solr/collection1/select' + req.url.substr(req.url.indexof('?')),
+	  	  path: '/solr/collection1/select' + req.url.substr(req.url.indexOf('?')),
 	  	  method: 'GET',
 	          headers: req.headers
   	};

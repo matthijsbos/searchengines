@@ -17,7 +17,7 @@ define(['knockout', 'jquery', 'jqcloud'], function(ko, $, _) {
 //		    jsonp: 'json.wrf'
 //	    });
 		$.getJSON('/search',
-			  {'q': self.search() || '*', 'wt':'json', 'json.wrf': '?' },
+			  {'q': self.search() || '*', 'wt':'json', 'wt': 'json', 'rows': '10' },
 			  function(data) {
 				self.results(data.response.docs);
 				self.searching(false);
